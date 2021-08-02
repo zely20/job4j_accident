@@ -9,15 +9,19 @@
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Text</th>
+        <th scope="col">Address</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="user" items="${users}" >
+    <c:forEach var="accident" items="${accidents}" >
         <tr>
-            <td><c:out value="${user.name}" /></td>
-            <td><c:out value="${user.surname}" /></td>
+            <td><c:out value="${accident.id}" /></td>
+            <td><c:out value="${accident.name}" /></td>
+            <td><c:out value="${accident.text}" /></td>
+            <td><c:out value="${accident.address}" /></td>
         </tr>
     </c:forEach>
     </tbody>
