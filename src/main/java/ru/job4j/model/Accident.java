@@ -5,14 +5,10 @@ import java.util.Objects;
 public class Accident {
     private int id;
     private String name;
-    private String text;
-    private String address;
+    private AccidentType type;
 
-    public Accident(String name, String text, String address) {
-        this.id = id;
+    public Accident(String name) {
         this.name = name;
-        this.text = text;
-        this.address = address;
     }
 
     public int getId() {
@@ -31,20 +27,12 @@ public class Accident {
         this.name = name;
     }
 
-    public String getText() {
-        return text;
+    public AccidentType getType() {
+        return type;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setType(AccidentType type) {
+        this.type = type;
     }
 
     @Override
@@ -52,11 +40,11 @@ public class Accident {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Accident accident = (Accident) o;
-        return id == accident.id && Objects.equals(name, accident.name) && Objects.equals(text, accident.text) && Objects.equals(address, accident.address);
+        return id == accident.id && Objects.equals(name, accident.name) && Objects.equals(type, accident.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, text, address);
+        return Objects.hash(id, name, type);
     }
 }

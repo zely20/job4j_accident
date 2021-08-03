@@ -11,8 +11,7 @@
     <thead>
     <tr>
         <th scope="col">Name</th>
-        <th scope="col">Text</th>
-        <th scope="col">Address</th>
+        <th scope="col">Type</th>
         <th scope="col">Edit</th>
     </tr>
     </thead>
@@ -20,8 +19,7 @@
     <c:forEach var="accident" items="${accidents}" >
         <tr>
             <td><c:out value="${accident.name}" /></td>
-            <td><c:out value="${accident.text}" /></td>
-            <td><c:out value="${accident.address}" /></td>
+            <td><c:out value="${accident.type.name}" /></td>
             <td> <a href="<c:url value='/edit?id=${accident.id}'/>">Редактировать инцидент</a></td>
         </tr>
     </c:forEach>
