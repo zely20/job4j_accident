@@ -9,10 +9,6 @@ public class Accident {
     private AccidentType type;
     private Set<Rule> rules;
 
-    public Accident(String name) {
-        this.name = name;
-    }
-
     public Set<Rule> getRules() {
         return rules;
     }
