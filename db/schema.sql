@@ -1,7 +1,13 @@
 CREATE TABLE types (
-                    id serial primary key,
-                    name varchar(2000)
+                       id serial primary key,
+                       name varchar(2000)
 );
+
+insert into types (name) values ('не выбрано');
+insert into types (name) values ('Превышение скорости');
+insert into types (name) values ('Обгон в неположенном месте');
+insert into types (name) values ('Стоянка в запрещенном месте');
+insert into types (name) values ('Нарушение разметки');
 
 CREATE TABLE accident (
                           id serial primary key,
@@ -13,6 +19,12 @@ CREATE TABLE rules (
                        id serial primary key,
                        name varchar(2000)
 );
+
+insert into rules (name) values ('статья не выбрана');
+insert into rules (name) values ('статья 18.13(скорость)');
+insert into rules (name) values ('статья 18.13(обгон)');
+insert into rules (name) values ('статья 18.22(стоянка)');
+insert into rules (name) values ('статья 18.14(разметка)');
 
 CREATE TABLE rules_accident (
                                 accident_id integer references accident(id),
