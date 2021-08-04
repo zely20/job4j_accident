@@ -16,9 +16,13 @@ public class AccidentJdbcTemplate {
         this.jdbc = jdbc;
     }
 
-    public Accident save(Accident accident) {
-        jdbc.update("insert into accident (name) values (?)",
-                accident.getName());
+    public Accident save(Accident accident, String [] ids) {
+        jdbc.update("insert into accident (name, type_id) values (?, ?)",
+                accident.getName(), accident.getType().getId());
+        for (String str : ids) {
+            jdbc.update("insert into rules_accident (accident_id, rules_id) values (?, ?)",
+                    accident.getId(), Integer.parseInt(str));
+        }
         return accident;
     }
 
@@ -33,7 +37,7 @@ public class AccidentJdbcTemplate {
     }
 
     public List<AccidentType> getAllTypes() {
-        return jdbc.query("select id, name from type",
+        return jdbc.query("select id, name from types",
                 (rs, row) -> {
                     AccidentType type = new AccidentType();
                     type.setId(rs.getInt("id"));
@@ -50,5 +54,9 @@ public class AccidentJdbcTemplate {
                     rule.setName(rs.getString("name"));
                     return rule;
                 });
+    }
+
+    public Accident findById(Integer id) {
+        return new Accident();
     }
 }

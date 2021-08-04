@@ -1,0 +1,1 @@
+select accident.id, accident.name, types.name FROM accident JOIN types ON types.id = accident.type_id;
