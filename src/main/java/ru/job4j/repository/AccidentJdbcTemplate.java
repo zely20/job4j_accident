@@ -98,6 +98,36 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident findById(Integer id) {
-        return new Accident();
+        return jdbc.queryForObject("SELECT " +
+                        "accident.id AS accident_id, " +
+                        "accident.name as accident_name, " +
+                        "types.id as types_id, " +
+                        "types.name as types_name " +
+                        "FROM accident " +
+                        "         JOIN types " +
+                        "              ON types.id = accident.type_id" +
+                        "where accident.id == ?;",
+                (rs, row) -> {
+                    Accident accident = new Accident();
+                    AccidentType accidentType = new AccidentType();
+                    accident.setId(rs.getInt("accident_id"));
+                    accident.setName(rs.getString("accident_name"));
+                    accidentType.setId(rs.getInt("types_id"));
+                    accidentType.setName(rs.getString("types_name"));
+                    accident.setType(accidentType);
+                    List<Rule> rules = jdbc.query("select * " +
+                                    "from rules_accident " +
+                                    "join rules " +
+                                    " ON rules_accident.rules_id = rules.id " +
+                                    "where rules_accident.accident_id = " + accident.getId() + ";",
+                            (r,ro) -> {
+                                Rule rule = new Rule();
+                                rule.setId(r.getInt("id"));
+                                rule.setName(r.getString("name"));
+                                return rule;
+                            });
+                    accident.setRules(new HashSet<>(rules));
+                    return accident;
+                }, id);
     }
 }
