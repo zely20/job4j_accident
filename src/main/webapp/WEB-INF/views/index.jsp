@@ -18,6 +18,7 @@
             <th scope="col">Type</th>
             <th scope="col">Rule</th>
             <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,7 @@
                     </c:forEach>
                 </th>
                 <td><a href="<c:url value='/edit?id=${accident.id}'/>">Редактировать инцидент</a></td>
+                <td><a href="<c:url value='/delete?id=${accident.id}'/>">Удалить</a></td>
             </tr>
         </c:forEach>
         </tbody>

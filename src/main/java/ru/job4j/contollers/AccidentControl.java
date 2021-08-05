@@ -41,4 +41,17 @@ public class AccidentControl {
         model.addAttribute("rules", accidents.getAllRules());
         return "accident/edit";
     }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Accident accident, HttpServletRequest req) {
+        String[] ids = req.getParameterValues("rIds");
+        accidents.update(accident, ids);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Integer id) {
+        accidents.delete(id);
+        return "redirect:/";
+    }
 }

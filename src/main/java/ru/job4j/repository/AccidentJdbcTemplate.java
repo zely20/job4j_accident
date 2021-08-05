@@ -61,18 +61,7 @@ public class AccidentJdbcTemplate {
                     accidentType.setId(rs.getInt("types_id"));
                     accidentType.setName(rs.getString("types_name"));
                     accident.setType(accidentType);
-                    List<Rule> rules = jdbc.query("select * " +
-                                    "from rules_accident " +
-                                    "join rules " +
-                                    " ON rules_accident.rules_id = rules.id " +
-                                    "where rules_accident.accident_id = " + accident.getId() + ";",
-                            (r,ro) -> {
-                            Rule rule = new Rule();
-                            rule.setId(r.getInt("id"));
-                            rule.setName(r.getString("name"));
-                            return rule;
-                            });
-                    accident.setRules(new HashSet<>(rules));
+                    accident.setRules(new HashSet<>(findRulesById(accident.getId())));
                     return accident;
                 });
     }
@@ -105,8 +94,8 @@ public class AccidentJdbcTemplate {
                         "types.name as types_name " +
                         "FROM accident " +
                         "         JOIN types " +
-                        "              ON types.id = accident.type_id" +
-                        "where accident.id == ?;",
+                        "              ON types.id = accident.type_id " +
+                        "where accident.id = ?;",
                 (rs, row) -> {
                     Accident accident = new Accident();
                     AccidentType accidentType = new AccidentType();
@@ -115,19 +104,36 @@ public class AccidentJdbcTemplate {
                     accidentType.setId(rs.getInt("types_id"));
                     accidentType.setName(rs.getString("types_name"));
                     accident.setType(accidentType);
-                    List<Rule> rules = jdbc.query("select * " +
-                                    "from rules_accident " +
-                                    "join rules " +
-                                    " ON rules_accident.rules_id = rules.id " +
-                                    "where rules_accident.accident_id = " + accident.getId() + ";",
-                            (r,ro) -> {
-                                Rule rule = new Rule();
-                                rule.setId(r.getInt("id"));
-                                rule.setName(r.getString("name"));
-                                return rule;
-                            });
-                    accident.setRules(new HashSet<>(rules));
+                    accident.setRules(new HashSet<>(findRulesById(accident.getId())));
                     return accident;
                 }, id);
+    }
+
+    public Accident update(Accident accident, String[] ids) {
+        jdbc.update("UPDATE accident SET name = (?), type_id = (?) WHERE id = (?);",
+                accident.getName(),
+                accident.getType().getId(),
+                accident.getId());
+        return accident;
+    }
+
+    public Integer delete(Integer id) {
+        jdbc.update("DELETE FROM rules_accident WHERE accident_id = (?);", id);
+        jdbc.update("DELETE FROM accident WHERE id = (?);", id);
+        return id;
+    }
+
+    private List<Rule> findRulesById(Integer id) {
+        return jdbc.query("select * " +
+                        "from rules_accident " +
+                        "join rules " +
+                        " ON rules_accident.rules_id = rules.id " +
+                        "where rules_accident.accident_id = " + id + ";",
+                (rs,row) -> {
+                    Rule rule = new Rule();
+                    rule.setId(rs.getInt("id"));
+                    rule.setName(rs.getString("name"));
+                    return rule;
+                });
     }
 }

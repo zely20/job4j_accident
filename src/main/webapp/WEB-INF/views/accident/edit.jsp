@@ -5,7 +5,7 @@
 <html>
 <body>
 <div class="container">
-    <form action="<c:url value='/save'/>" method='POST'>
+    <form action="<c:url value='/update'/>" method='POST'>
         <table>
             <tr>
                 <td>Название:</td>
@@ -18,12 +18,7 @@
                 <td>
                     <select name="type.id">
                         <c:forEach var="type" items="${types}">
-                            <c:if test="${accident.type.id == type.id}">
-                                <option checked value=<c:out value="${type.id}"/>><c:out value="${type.name}"/></option>
-                            </c:if>
-                            <c:if test="${accident.type.id != type.id}">
                                 <option value=<c:out value="${type.id}"/>><c:out value="${type.name}"/></option>
-                            </c:if>
                         </c:forEach>
                     </select>
                 </td>
@@ -33,7 +28,7 @@
                 <td>
                     <select name="rIds" multiple>
                         <c:forEach var="rule" items="${rules}">
-                            <option value=<c:out value="${rule.id}"/>><c:out value="${rule.name}"/></option>
+                                    <option value=<c:out value="${rule.id}"/>><c:out value="${rule.name}"/></option>
                         </c:forEach>
                     </select>
                 </td>
