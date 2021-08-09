@@ -13,7 +13,7 @@ public class AccidentMem {
 
     private final Map<Integer, Accident> accidents = new HashMap<Integer, Accident>();
     private final Map<Integer, AccidentType> types = new HashMap<>();
-    private final List<Rule> rules = new ArrayList<>();
+    private final Map<Integer, Rule> rules = new HashMap<>();
     private static AtomicInteger id = new AtomicInteger(0);
 
     public AccidentMem(){
@@ -22,9 +22,10 @@ public class AccidentMem {
         types.put(2, AccidentType.of(2, "Обгон в неположенном месте"));
         types.put(3, AccidentType.of(3, "Стоянка в запрещенном месте"));
         types.put(4, AccidentType.of(4, "Нарушение разметки"));
-        rules.add(Rule.of(0, "Статья. 1"));
-        rules.add(Rule.of(1, "Статья. 2"));
-        rules.add(Rule.of(2, "Статья. 3"));
+
+        rules.put(0, Rule.of(0, "Статья. 1"));
+        rules.put(1, Rule.of(1, "Статья. 2"));
+        rules.put(2, Rule.of(2, "Статья. 3"));
     }
 
     public List<Accident> findAll() {
@@ -38,7 +39,8 @@ public class AccidentMem {
     }
 
     public List<Rule> getAllRules() {
-        return this.rules;
+        List list = new ArrayList(rules.values());
+        return list;
     }
 
     public Accident create(Accident accident, String [] ids) {
