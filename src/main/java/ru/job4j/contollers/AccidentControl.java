@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccidentControl {
+
     private final AccidentJdbcTemplate accidents;
 
     public AccidentControl(AccidentJdbcTemplate accidents) {
