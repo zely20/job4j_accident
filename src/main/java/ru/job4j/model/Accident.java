@@ -11,7 +11,13 @@ public class Accident {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @OneToOne
+    @JoinColumn(name = "type_id")
     private AccidentType type;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "rules_accident",
+               joinColumns = @JoinColumn(name = "accident_id"),
+                inverseJoinColumns = @JoinColumn(name = "rules_id"))
     private Set<Rule> rules;
 
     public Set<Rule> getRules() {

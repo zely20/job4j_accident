@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.model.Accident;
+import ru.job4j.model.Rule;
+import ru.job4j.repository.AccidentHibernate;
 import ru.job4j.repository.AccidentJdbcTemplate;
 import ru.job4j.repository.AccidentMem;
 
@@ -15,9 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class AccidentControl {
 
-    private final AccidentJdbcTemplate accidents;
+    private final AccidentHibernate accidents;
 
-    public AccidentControl(AccidentJdbcTemplate accidents) {
+    public AccidentControl(AccidentHibernate accidents) {
         this.accidents = accidents;
     }
 
@@ -31,7 +33,12 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.save(accident, ids);
+        for(String id : ids) {
+            Rule rule = new Rule();
+            rule.setId(Integer.parseInt(id));
+            accident.getRules().add(rule);
+        }
+        accidents.save(accident);
         return "redirect:/";
     }
 
@@ -46,7 +53,12 @@ public class AccidentControl {
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidents.update(accident, ids);
+        for(String id : ids) {
+            Rule rule = new Rule();
+            rule.setId(Integer.parseInt(id));
+            accident.getRules().add(rule);
+        }
+        accidents.save(accident);
         return "redirect:/";
     }
 

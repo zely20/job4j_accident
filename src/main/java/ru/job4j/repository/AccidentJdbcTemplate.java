@@ -1,6 +1,5 @@
 package ru.job4j.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -14,10 +13,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
 import java.util.List;
 
-@Repository
+//@Repository
 public class AccidentJdbcTemplate {
     private final JdbcTemplate jdbc;
     private final AccidentMapper accidentMapper;
