@@ -64,4 +64,8 @@ public class Accident {
     public int hashCode() {
         return Objects.hash(id, name, type, rules);
     }
+
+    public void addRule(Rule rule) {
+        this.rules.add(rule);
+    }
 }
