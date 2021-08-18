@@ -1,6 +1,7 @@
 package ru.job4j.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,11 +15,11 @@ public class Accident {
     @OneToOne
     @JoinColumn(name = "type_id")
     private AccidentType type;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "rules_accident",
                joinColumns = @JoinColumn(name = "accident_id"),
                 inverseJoinColumns = @JoinColumn(name = "rules_id"))
-    private Set<Rule> rules;
+    private Set<Rule> rules = new HashSet<>();
 
     public Set<Rule> getRules() {
         return rules;
@@ -28,11 +29,11 @@ public class Accident {
         this.rules = rules;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
