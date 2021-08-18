@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
+/*@Configuration
 @PropertySource("classpath:app.properties")
-@EnableTransactionManagement
+@EnableTransactionManagement*/
 public class HbmConfig {
 
     @Bean

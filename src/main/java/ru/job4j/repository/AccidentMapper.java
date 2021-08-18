@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
 
-@Service
+//@Service
 public class AccidentMapper implements RowMapper<Accident> {
 
-    private final AccidentJdbcTemplate accidentJdbcTemplate;
+    /*private final AccidentJdbcTemplate accidentJdbcTemplate;
 
-    public AccidentMapper(AccidentJdbcTemplate accidentJdbcTemplate) {
+    *//*public AccidentMapper(AccidentJdbcTemplate accidentJdbcTemplate) {
         this.accidentJdbcTemplate = accidentJdbcTemplate;
-    }
+    }*/
 
     @Override
     public Accident mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -27,7 +27,7 @@ public class AccidentMapper implements RowMapper<Accident> {
         accidentType.setId(resultSet.getInt("types_id"));
         accidentType.setName(resultSet.getString("types_name"));
         accident.setType(accidentType);
-        accident.setRules(new HashSet<>(accidentJdbcTemplate.findRulesById(accident.getId())));
+       // accident.setRules(new HashSet<>(accidentJdbcTemplate.findRulesById(accident.getId())));
         return accident;
     }
 }

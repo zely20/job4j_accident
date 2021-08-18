@@ -9,7 +9,7 @@ import java.util.Set;
 public class Accident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     @OneToOne
     @JoinColumn(name = "type_id")

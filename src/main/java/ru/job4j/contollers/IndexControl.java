@@ -4,22 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.model.Accident;
-import ru.job4j.repository.AccidentJdbcTemplate;
+import ru.job4j.service.AccidentService;
 
 import java.util.List;
 
 @Controller
 public class IndexControl {
 
-    private final AccidentJdbcTemplate accidentsMem;
+    private final AccidentService accidentService;
 
-    public IndexControl(AccidentJdbcTemplate accidents) {
-        this.accidentsMem = accidents;
+    public IndexControl(AccidentService accidentService) {
+        this.accidentService = accidentService;
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Accident> accidents = accidentsMem.getAll();
+        List<Accident> accidents = accidentService.getAllAccidents();
         model.addAttribute("accidents", accidents);
         return "index";
     }

@@ -40,7 +40,7 @@ public class DataConfig {
         vendorAdapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("ru.job4j.accident");
+        factory.setPackagesToScan("ru.job4j");
         factory.setDataSource(ds);
         return factory;
     }
