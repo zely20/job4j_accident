@@ -36,7 +36,7 @@ public class AccidentService {
 
     @Transactional
     public void updateAccident(Accident accident, String[] rIds) {
-        Accident current = getAccidentById(accident.getId());
+        Accident current = getFetchAccidentById(accident.getId());
         current.setName(accident.getName());
         current.setType(accident.getType());
         current.getRules().clear();
@@ -48,16 +48,19 @@ public class AccidentService {
 
     @Transactional
     public void deleteAccident(int id) {
-        accidentRepository.delete(getAccidentById(id));
+        accidentRepository.delete(getFetchAccidentById(id));
     }
 
     @Transactional
-    public Accident getAccidentById(int id) {
-        return accidentRepository.findById(id).get();
+    public Accident getFetchAccidentById(int id) {
+        return accidentRepository.getFetchAccidentById(id);
     }
 
     public List<Accident> getAllAccidents() {
         return (List<Accident>) accidentRepository.findAll();
+    }
+    public List<Accident> findAllFetchAccident() {
+        return (List<Accident>) accidentRepository.fetchAccident();
     }
 
     public List<AccidentType> getAllTypes() {

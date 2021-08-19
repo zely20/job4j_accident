@@ -19,7 +19,7 @@ public class IndexControl {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<Accident> accidents = accidentService.getAllAccidents();
+        List<Accident> accidents = accidentService.findAllFetchAccident();
         model.addAttribute("accidents", accidents);
         return "index";
     }
