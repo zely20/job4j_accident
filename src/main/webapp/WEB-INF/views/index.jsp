@@ -8,7 +8,9 @@
 </head>
 <body>
 <div class="container">
-
+    <div>
+        Login as : ${user.username}
+    </div>
     <a class="btn btn-primary" href="<c:url value='/create'/>" role="button">Добавить инцидент</a>
 
     <table class="table">

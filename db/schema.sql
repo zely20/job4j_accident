@@ -31,3 +31,16 @@ CREATE TABLE rules_accident (
                                 rules_id integer references rules(id),
                                 PRIMARY KEY (accident_id, rules_id)
 );
+
+CREATE TABLE users (
+                       username VARCHAR(50) NOT NULL,
+                       password VARCHAR(100) NOT NULL,
+                       enabled boolean default true,
+                       PRIMARY KEY (username)
+);
+
+CREATE TABLE authorities (
+                             username VARCHAR(50) NOT NULL,
+                             authority VARCHAR(50) NOT NULL,
+                             FOREIGN KEY (username) REFERENCES users(username)
+);
