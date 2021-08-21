@@ -4,9 +4,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import ru.job4j.model.Accident;
-import ru.job4j.model.AccidentType;
-import ru.job4j.model.Rule;
+import ru.job4j.entity.Accident;
+import ru.job4j.entity.AccidentType;
+import ru.job4j.entity.Rule;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

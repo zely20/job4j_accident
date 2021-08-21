@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.job4j.model.Accident;
-import ru.job4j.model.Rule;
+import ru.job4j.entity.Accident;
 import ru.job4j.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;

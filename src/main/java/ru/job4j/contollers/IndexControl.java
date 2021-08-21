@@ -4,7 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.job4j.model.Accident;
+import ru.job4j.entity.Accident;
 import ru.job4j.service.AccidentService;
 
 import java.util.List;

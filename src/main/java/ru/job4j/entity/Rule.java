@@ -1,25 +1,22 @@
-package ru.job4j.model;
+package ru.job4j.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "types")
-public class AccidentType {
+@Table(name = "rules")
+public class Rule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
 
-    public AccidentType() {
-    }
-
-    public static AccidentType of(int id, String name) {
-        AccidentType type = new AccidentType();
-        type.setId(id);
-        type.setName(name);
-        return type;
+    public static Rule of(int id, String name) {
+        Rule rule = new Rule();
+        rule.id = id;
+        rule.name = name;
+        return rule;
     }
 
     public Integer getId() {
@@ -40,14 +37,10 @@ public class AccidentType {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AccidentType that = (AccidentType) o;
-        return id == that.id;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rule rule = (Rule) o;
+        return id == rule.id;
     }
 
     @Override

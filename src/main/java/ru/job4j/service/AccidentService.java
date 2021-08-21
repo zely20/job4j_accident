@@ -2,9 +2,9 @@ package ru.job4j.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.job4j.model.Accident;
-import ru.job4j.model.AccidentType;
-import ru.job4j.model.Rule;
+import ru.job4j.entity.Accident;
+import ru.job4j.entity.AccidentType;
+import ru.job4j.entity.Rule;
 import ru.job4j.repository.AccidentRepository;
 import ru.job4j.repository.AccidentTypeRepository;
 import ru.job4j.repository.RuleRepository;

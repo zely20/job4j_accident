@@ -1,13 +1,11 @@
 package ru.job4j.repository;
 
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Service;
-import ru.job4j.model.Accident;
-import ru.job4j.model.AccidentType;
+import ru.job4j.entity.Accident;
+import ru.job4j.entity.AccidentType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
 
 //@Service
 public class AccidentMapper implements RowMapper<Accident> {

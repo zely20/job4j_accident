@@ -2,10 +2,9 @@ package ru.job4j.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
-import ru.job4j.model.Accident;
-import ru.job4j.model.AccidentType;
-import ru.job4j.model.Rule;
+import ru.job4j.entity.Accident;
+import ru.job4j.entity.AccidentType;
+import ru.job4j.entity.Rule;
 
 import java.util.List;
 
