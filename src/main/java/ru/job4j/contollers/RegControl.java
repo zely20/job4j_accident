@@ -1,10 +1,10 @@
 package ru.job4j.contollers;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import ru.job4j.entity.Accident;
 import ru.job4j.entity.User;
 import ru.job4j.repository.AuthorityRepository;
@@ -23,6 +23,22 @@ public class RegControl {
         this.authorities = authorities;
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public String userAlreadyReg() {
+        return "redirect:/reg?regError=true";
+    }
+
+    @GetMapping("/reg")
+    public String reg(@RequestParam(value = "regError", required = false) String regError,
+                      Model model) {
+        String errorMessage = null;
+        if (regError != null) {
+            errorMessage = "Такой пользователь уже зарегистрирован";
+        }
+        model.addAttribute("error", errorMessage);
+        return "reg";
+    }
+
     @PostMapping("/reg")
     public String save(@ModelAttribute User user) {
         user.setEnabled(true);
@@ -30,10 +46,5 @@ public class RegControl {
         user.setAuthority(authorities.findByAuthority("ROLE_USER"));
         users.save(user);
         return "redirect:/login";
-    }
-
-    @GetMapping("/reg")
-    public String reg(@ModelAttribute Accident accident) {
-        return "reg";
     }
 }
