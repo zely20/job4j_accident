@@ -38,3 +38,4 @@ public class LoginControl {
         return "redirect:/login?logout=true";
     }
 }
+
